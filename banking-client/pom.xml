@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.github.bbortt</groupId>
+    <artifactId>banking-client</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.release>21</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <citrus.version>4.8.0</citrus.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.citrusframework</groupId>
+                <artifactId>citrus-openapi-codegen-maven-plugin</artifactId>
+                <version>${citrus.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>

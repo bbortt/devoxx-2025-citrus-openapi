@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.github.bbortt</groupId>
+    <artifactId>banking-application</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.release>21</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <citrus.version>4.8.0</citrus.version>
+        <openapi-generator.version>7.15.0</openapi-generator.version>
+        <spring-boot.version>3.5.5</spring-boot.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.citrusframework</groupId>
+                <artifactId>citrus-bom</artifactId>
+                <version>${citrus.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.citrusframework</groupId>
+            <artifactId>citrus-test-api-core</artifactId>
+            <version>${citrus.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>${openapi-generator.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>specs/openapi.yaml</inputSpec>
+                            <generatorName>spring</generatorName>
+                            <modelPackage>
+                                io.github.bbortt.devoxx.banking.application.api.dto
+                            </modelPackage>
+                            <apiPackage>
+                                io.github.bbortt.devoxx.banking.application.api
+                            </apiPackage>
+                            <configOptions>
+                                <delegatePattern>true</delegatePattern>
+                                <generateBuilders>true</generateBuilders>
+                                <interfaceOnly>true</interfaceOnly>
+                                <userOptional>true</userOptional>
+                                <useSpringBoot3>true</useSpringBoot3>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.citrusframework</groupId>
+                <artifactId>citrus-openapi-codegen-maven-plugin</artifactId>
+                <version>${citrus.version}</version>
+                <configuration>
+                    <apis>
+                        <api>
+                            <prefix>devoxx</prefix>
+                            <source>specs/openapi.yaml</source>
+                            <apiConfigOptions>
+                                <output>target/generated-test-sources</output>
+                            </apiConfigOptions>
+                        </api>
+                    </apis>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>create-test-api</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

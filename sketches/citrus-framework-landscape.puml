@@ -1,0 +1,22 @@
+@startuml
+
+!theme vibrant
+
+package "The World" {
+
+    component "citrusframework/citrus" as cit
+    component "citrusframework/citrus-simulator" as sim
+
+    cit ..> sim
+
+    package "PostFinance" {
+        component "pf/citrus" as pfta
+        component "pf/citrus-simulator" as pfsim
+
+        cit ..> pfta
+        pfta ..> pfsim
+        sim ..> pfsim
+    }
+}
+
+@enduml

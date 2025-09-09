@@ -1,0 +1,13 @@
+@startuml
+
+!theme vibrant
+
+component consumer #FFCC00
+component producer #005B61
+
+component "OpenAPI Specification" as spec #A5C400
+
+consumer -up-> spec
+spec <-down- producer
+
+@enduml

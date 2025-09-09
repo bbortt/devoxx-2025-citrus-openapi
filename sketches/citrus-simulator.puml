@@ -1,0 +1,13 @@
+@startuml
+
+!theme vibrant
+
+component consumer #FFCC00
+component "citrusframework/citrus-simulator" as sim #005B61
+
+component "OpenAPI Specification" as spec #A5C400
+
+consumer -right-> sim
+spec <-down- sim
+
+@enduml
