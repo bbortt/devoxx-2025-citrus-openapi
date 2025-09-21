@@ -19,6 +19,8 @@ paths:
       operationId: getAccountDetails
       summary: Get account details
       description: Retrieve details of a specific bank account.
+      tags:
+        - accounts
       parameters:
         - name: accountId
           in: path
@@ -40,6 +42,8 @@ paths:
       operationId: createTransaction
       summary: Create a new transaction
       description: Perform a transfer between two accounts.
+      tags:
+        - transactions
       requestBody:
         required: true
         content:
