@@ -28,6 +28,12 @@ paths:
           schema:
             type: string
             example: "ACC123456"
+        - name: securityToken
+          in: header
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
         '200':
           description: Account details retrieved successfully.
@@ -35,6 +41,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Account'
+        '400':
+          description: Invalid request.
         '404':
           description: Account not found.
   /transactions:
@@ -44,6 +52,13 @@ paths:
       description: Perform a transfer between two accounts.
       tags:
         - transactions
+      parameters:
+        - name: securityToken
+          in: header
+          required: true
+          schema:
+            type: string
+            format: uuid
       requestBody:
         required: true
         content:
@@ -59,6 +74,8 @@ paths:
                 $ref: '#/components/schemas/TransactionResponse'
         '400':
           description: Invalid transaction request.
+        '403':
+          description: Transaction request for accounts the user is not permitted access to.
         '422':
           description: Insufficient funds.
 
@@ -118,7 +135,7 @@ components:
           example: "TX987654321"
         status:
           type: string
-          enum: [PENDING, COMPLETED, FAILED]
+          enum: [ PENDING, COMPLETED, FAILED ]
           example: "COMPLETED"
         timestamp:
           type: string

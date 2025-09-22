@@ -6,9 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static java.math.BigDecimal.ZERO;
 import static java.math.RoundingMode.HALF_UP;
+import static java.util.Objects.isNull;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @RestController
 public class AccountsResource implements AccountsApi {
@@ -20,7 +23,11 @@ public class AccountsResource implements AccountsApi {
     }
 
     @Override
-    public ResponseEntity<Account> getAccountDetails(String accountId) {
+    public ResponseEntity<Account> getAccountDetails(String accountId, UUID securityToken) {
+        if (isNull(securityToken)) {
+            return ResponseEntity.status(UNAUTHORIZED).build();
+        }
+
         return accountService.findAccountById(accountId)
                 .map(account -> ResponseEntity.ok(toDto(account)))
                 .orElseGet(() -> ResponseEntity.notFound().build());

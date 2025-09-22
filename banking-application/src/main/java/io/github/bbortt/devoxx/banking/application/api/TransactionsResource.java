@@ -6,6 +6,12 @@ import io.github.bbortt.devoxx.banking.application.service.TransactionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
+import static java.util.Objects.isNull;
+import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
+
 @RestController
 public class TransactionsResource implements TransactionsApi {
 
@@ -16,7 +22,11 @@ public class TransactionsResource implements TransactionsApi {
     }
 
     @Override
-    public ResponseEntity<TransactionResponse> createTransaction(TransactionRequest transactionRequest) {
+    public ResponseEntity<TransactionResponse> createTransaction(UUID securityToken, TransactionRequest transactionRequest) {
+        if (isNull(securityToken)) {
+            return ResponseEntity.status(UNAUTHORIZED).build();
+        }
+
         try {
             var transactionId = transactionService.createAccountTransfer(
                     transactionRequest.getFromAccount(),
@@ -27,7 +37,7 @@ public class TransactionsResource implements TransactionsApi {
 
             return ResponseEntity.ok(new TransactionResponse().transactionId(transactionId));
         } catch (TransactionService.AccountNotFoundException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.status(FORBIDDEN).build();
         } catch (TransactionService.InsufficientFundsException e) {
             return ResponseEntity.unprocessableEntity().build();
         }

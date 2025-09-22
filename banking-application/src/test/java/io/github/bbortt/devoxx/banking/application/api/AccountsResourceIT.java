@@ -25,13 +25,17 @@ import org.springframework.test.context.ContextConfiguration;
 
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.citrusframework.openapi.AutoFillType.REQUIRED;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 
-@SpringBootTest
 @CitrusSpringSupport
+@SpringBootTest(webEnvironment = NONE)
 @ContextConfiguration(classes = {CitrusSpringConfig.class, AccountsResourceIT.AccountsApiConfiguration.class, DevoxxBeanConfiguration.class})
 class AccountsResourceIT {
+
+    private static final String BBORTT_ACCOUNT_ID = "CH685984389182Q70Y469";
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -41,10 +45,9 @@ class AccountsResourceIT {
     @Test
     @CitrusTest
     void shouldGetAccountDetails_forExistingAccountId(@CitrusResource TestCaseRunner testCaseRunner) {
-        var accountId = "CH685984389182Q70Y469";
-
         testCaseRunner.when(
-                api.sendGetAccountDetails(accountId)
+                api.sendGetAccountDetails(BBORTT_ACCOUNT_ID, null)
+                        .autoFill(REQUIRED)
         );
 
         testCaseRunner.then(
@@ -53,7 +56,9 @@ class AccountsResourceIT {
                                 assertThat(getAccountFromPayload(message))
                                         .satisfies(
                                                 account -> assertThat(account.getAccountId())
-                                                        .isEqualTo(accountId)
+                                                        .isEqualTo(BBORTT_ACCOUNT_ID),
+                                                account -> assertThat(account.getOwner())
+                                                        .isEqualTo("Timon Borter")
                                         )
                         )
         );
@@ -71,7 +76,8 @@ class AccountsResourceIT {
     @CitrusTest
     void shouldGetAccountDetails_forInvalidAccountId(@CitrusResource TestCaseRunner testCaseRunner) {
         testCaseRunner.when(
-                api.sendGetAccountDetails("invalid-account-id")
+                api.sendGetAccountDetails("invalid-account-id", null)
+                        .autoFill(REQUIRED)
         );
 
         testCaseRunner.then(
