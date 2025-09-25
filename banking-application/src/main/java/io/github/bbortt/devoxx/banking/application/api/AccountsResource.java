@@ -1,6 +1,7 @@
 package io.github.bbortt.devoxx.banking.application.api;
 
 import io.github.bbortt.devoxx.banking.application.api.dto.Account;
+import io.github.bbortt.devoxx.banking.application.api.dto.Currency;
 import io.github.bbortt.devoxx.banking.application.service.AccountService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +11,7 @@ import java.util.UUID;
 
 import static java.math.BigDecimal.ZERO;
 import static java.math.RoundingMode.HALF_UP;
+import static java.util.Arrays.stream;
 import static java.util.Objects.isNull;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
@@ -43,7 +45,14 @@ public class AccountsResource implements AccountsApi {
                                 .orElse(ZERO)
                                 .floatValue()
                 )
-                .currency(account.getCurrency())
+                .currency(mapCurrencStringToEnum(account.getCurrency()))
                 .build();
+    }
+
+    private Currency mapCurrencStringToEnum(String currency) {
+        return stream(Currency.values())
+                .filter(value -> value.name().equalsIgnoreCase(currency))
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("All persisted accounts should comply with the currency enum!"));
     }
 }

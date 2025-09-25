@@ -1,0 +1,17 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="CLI (create-transaction)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" value="dev" />
+    <module name="banking-client" />
+    <option name="PROGRAM_PARAMETERS" value="create-transaction CH685984389182Q70Y469 CH077012473296D5049K3 100" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="io.github.bbortt.devoxx.banking.client.Application" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="io.github.bbortt.devoxx.banking.client.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

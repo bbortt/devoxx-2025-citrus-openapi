@@ -1,5 +1,6 @@
 package io.github.bbortt.devoxx.banking.application.service;
 
+import io.github.bbortt.devoxx.banking.application.api.dto.Currency;
 import io.github.bbortt.devoxx.banking.application.domain.Account;
 import jakarta.annotation.Nonnull;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -21,7 +22,7 @@ public class TransactionService {
         this.accountService = accountService;
     }
 
-    public String createAccountTransfer(@Nonnull String fromAccount, @Nonnull String toAccount, @Nonnull Float amount, @Nonnull String currency) throws AccountNotFoundException, InsufficientFundsException {
+    public String createAccountTransfer(@Nonnull String fromAccount, @Nonnull String toAccount, @Nonnull Float amount, @Nonnull Currency currency) throws AccountNotFoundException, InsufficientFundsException {
         var debitor = accountService.findAccountById(fromAccount)
                 .orElseThrow(() -> new AccountNotFoundException(fromAccount));
 
@@ -46,7 +47,7 @@ public class TransactionService {
         return "TX" + RandomStringUtils.secure().nextAlphabetic(9);
     }
 
-    private static void assertThatDebitorHasSufficientAmounts(String fromAccount, BigDecimal amount, String currency, Account debitor) throws InsufficientFundsException {
+    private static void assertThatDebitorHasSufficientAmounts(String fromAccount, BigDecimal amount, Currency currency, Account debitor) throws InsufficientFundsException {
         if (isNull(debitor.getBalance())
                 || debitor.getBalance().compareTo(amount) <= 0) {
             throw new InsufficientFundsException(fromAccount, amount, currency);
@@ -62,7 +63,7 @@ public class TransactionService {
 
     public static class InsufficientFundsException extends Throwable {
 
-        public InsufficientFundsException(@Nonnull String accountId, @Nonnull BigDecimal amount, @Nonnull String currency) {
+        public InsufficientFundsException(@Nonnull String accountId, @Nonnull BigDecimal amount, @Nonnull Currency currency) {
             super(format("Account ID '%s' has less than %s %s", accountId, amount.setScale(2, HALF_UP).toPlainString(), currency));
         }
     }
