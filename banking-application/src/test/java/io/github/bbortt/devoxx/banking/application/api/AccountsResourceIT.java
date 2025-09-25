@@ -74,10 +74,10 @@ class AccountsResourceIT {
 
     @Test
     @CitrusTest
-    void shouldGetAccountDetails_forInvalidAccountId(@CitrusResource TestCaseRunner testCaseRunner) {
+    void shouldReceiveNotFoundResponse_forInvalidAccountId(@CitrusResource TestCaseRunner testCaseRunner) {
         testCaseRunner.when(
-                api.sendGetAccountDetails("invalid-account-id", null)
-                        .autoFill(REQUIRED)
+            api.sendGetAccountDetails("invalid-account-id", null)
+                .autoFill(REQUIRED)
         );
 
         testCaseRunner.then(

@@ -99,8 +99,7 @@ components:
           format: float
           example: 2500.75
         currency:
-          type: string
-          example: "CHF"
+          $ref: '#/components/schemas/Currency'
 
     TransactionRequest:
       type: object
@@ -121,8 +120,7 @@ components:
           format: float
           example: 150.50
         currency:
-          type: string
-          example: "CHF"
+          $ref: '#/components/schemas/Currency'
         description:
           type: string
           example: "Dinner with friends"
@@ -131,8 +129,7 @@ components:
       type: object
       properties:
         transactionId:
-          type: string
-          example: "TX987654321"
+          $ref: '#/components/schemas/TransactionId'
         status:
           type: string
           enum: [ PENDING, COMPLETED, FAILED ]
@@ -141,3 +138,14 @@ components:
           type: string
           format: date-time
           example: "2025-08-22T14:55:00Z"
+
+    Currency:
+      type: string
+      example: "CHF"
+      enum:
+        - CHF
+        - EUR
+    TransactionId:
+      type: string
+      # TODO: This pattern is too complicated for the Simulator
+      # pattern: '^TX\w{,9}$'

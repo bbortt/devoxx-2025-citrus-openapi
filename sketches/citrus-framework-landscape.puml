@@ -4,14 +4,14 @@
 
 package "The World" {
 
-    component "citrusframework/citrus" as cit
-    component "citrusframework/citrus-simulator" as sim
+    component "citrusframework/citrus" as cit #FFCC00
+    component "citrusframework/citrus-simulator" as sim #FFCC00
 
     cit ..> sim
 
     package "PostFinance" {
-        component "pf/citrus" as pfta
-        component "pf/citrus-simulator" as pfsim
+        component "pf/citrus" as pfta #A5C400
+        component "pf/citrus-simulator" as pfsim #A5C400
 
         cit ..> pfta
         pfta ..> pfsim

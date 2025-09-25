@@ -51,7 +51,7 @@ class TransactionsResourceIT {
     @CitrusTest
     void shouldRejectRequestWithInvalidAccountsNumbers(@CitrusResource TestCaseRunner testCaseRunner) {
         testCaseRunner.when(
-                transactionsApi.sendCreateTransaction(null)
+                transactionsApi.sendCreateTransaction()
                         .autoFill(REQUIRED)
         );
 
