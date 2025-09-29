@@ -12,6 +12,8 @@ This repository contains the following Maven projects:
 /banking-client                : CLI client to query the Banking API
 ```
 
+The [`specs` folder](./specs) contains the OpenAPI specification of the Banking API.
+
 The [`banking-application`](./banking-application) module also includes Citrus tests with actions based on the Banking API.
 
 ## Banking Application
