@@ -47,7 +47,6 @@
     <dependency>
       <groupId>org.citrusframework</groupId>
       <artifactId>citrus-test-api-core</artifactId>
-      <version>${citrus.version}</version>
     </dependency>
 
     <dependency>
