@@ -40,16 +40,7 @@
   </dependencyManagement>
 
   <dependencies>
-    <dependency>
-      <groupId>org.citrusframework</groupId>
-      <artifactId>citrus-spring-boot-simulator</artifactId>
-      <version>${citrus-simulator.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.citrusframework</groupId>
-      <artifactId>citrus-simulator-ui</artifactId>
-      <version>${citrus-simulator.version}</version>
-    </dependency>
+    <!-- TODO: Add Citrus Spring-Boot Simulator -->
 
     <dependency>
       <groupId>org.springframework.boot</groupId>

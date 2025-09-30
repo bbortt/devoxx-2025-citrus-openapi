@@ -19,13 +19,7 @@
 
   <dependencyManagement>
     <dependencies>
-      <dependency>
-        <groupId>org.citrusframework</groupId>
-        <artifactId>citrus-bom</artifactId>
-        <version>${citrus.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
+      <!-- TODO: Add Citrus BOM -->
 
       <dependency>
         <groupId>org.springframework.boot</groupId>
@@ -74,16 +68,9 @@
       <optional>true</optional>
     </dependency>
 
-    <dependency>
-      <groupId>org.citrusframework</groupId>
-      <artifactId>citrus-test-api-core</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.citrusframework</groupId>
-      <artifactId>citrus-junit5</artifactId>
-      <scope>test</scope>
-    </dependency>
+    <!-- TODO: Add Citrus Test API Core -->
+    <!-- TODO: Add Citrus JUnit 5 -->
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -133,31 +120,10 @@
         </executions>
       </plugin>
 
-      <plugin>
-        <groupId>org.citrusframework</groupId>
-        <artifactId>citrus-openapi-codegen-maven-plugin</artifactId>
-        <version>${citrus.version}</version>
-        <configuration>
-          <apis>
-            <api>
-              <prefix>devoxx</prefix>
-              <source>specs/openapi.yaml</source>
-              <apiConfigOptions>
-                <generateModels>false</generateModels>
-                <generateModelTests>false</generateModelTests>
-                <output>banking-application/target/generated-test-sources/openapi</output>
-              </apiConfigOptions>
-            </api>
-          </apis>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>create-test-api</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+      <!-- TODO: Add Citrus OpenAPI Codegen Plugin -->
+      <!-- <goal>create-test-api</goal> -->
+      <!-- <prefix>devoxx</prefix> -->
+      <!-- <output>banking-application/target/generated-test-sources/openapi</output> -->
 
       <plugin>
         <groupId>org.codehaus.mojo</groupId>

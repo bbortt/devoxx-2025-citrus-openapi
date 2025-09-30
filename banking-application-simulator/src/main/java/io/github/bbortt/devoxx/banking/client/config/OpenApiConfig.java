@@ -9,10 +9,5 @@ import java.util.List;
 @Configuration
 public class OpenApiConfig {
 
-    @Bean
-    public OpenApiRepository accountsOpenApiRepository() {
-        OpenApiRepository openApiRepository = new OpenApiRepository();
-        openApiRepository.setLocations(List.of("openapi/openapi.yaml"));
-        return openApiRepository;
-    }
+    // TODO Create OpenAPI Repository
 }
