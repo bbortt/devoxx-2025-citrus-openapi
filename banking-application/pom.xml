@@ -84,6 +84,7 @@
       <artifactId>citrus-junit5</artifactId>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -137,24 +138,24 @@
         <groupId>org.citrusframework</groupId>
         <artifactId>citrus-openapi-codegen-maven-plugin</artifactId>
         <version>${citrus.version}</version>
-        <configuration>
-          <apis>
-            <api>
-              <prefix>devoxx</prefix>
-              <source>specs/openapi.yaml</source>
-              <apiConfigOptions>
-                <generateModels>false</generateModels>
-                <generateModelTests>false</generateModelTests>
-                <output>banking-application/target/generated-test-sources/openapi</output>
-              </apiConfigOptions>
-            </api>
-          </apis>
-        </configuration>
         <executions>
           <execution>
             <goals>
               <goal>create-test-api</goal>
             </goals>
+            <configuration>
+              <apis>
+                <api>
+                  <prefix>devoxx</prefix>
+                  <source>specs/openapi.yaml</source>
+                  <apiConfigOptions>
+                    <generateModels>false</generateModels>
+                    <generateModelTests>false</generateModelTests>
+                    <output>banking-application/target/generated-test-sources/openapi</output>
+                  </apiConfigOptions>
+                </api>
+              </apis>
+            </configuration>
           </execution>
         </executions>
       </plugin>
