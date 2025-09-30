@@ -34,7 +34,7 @@ public class Application extends SimulatorRestAdapter {
 
     @Override
     public List<String> urlMappings(SimulatorRestConfigurationProperties simulatorRestConfiguration) {
-        return List.of("/accounts/*", "/transactions");
+        // TODO: Add URL Mappings
     }
 
     @Override
