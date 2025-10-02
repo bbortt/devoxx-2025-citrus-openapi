@@ -39,14 +39,23 @@
 
   <dependencies>
     <dependency>
+      <groupId>io.swagger.core.v3</groupId>
+      <artifactId>swagger-annotations</artifactId>
+      <version>2.2.37</version>
+    </dependency>
+    <dependency>
       <groupId>jakarta.validation</groupId>
       <artifactId>jakarta.validation-api</artifactId>
       <version>3.1.1</version>
     </dependency>
-
     <dependency>
-      <groupId>org.citrusframework</groupId>
-      <artifactId>citrus-test-api-core</artifactId>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.openapitools</groupId>
+      <artifactId>jackson-databind-nullable</artifactId>
+      <version>0.2.7</version>
     </dependency>
 
     <dependency>
@@ -65,6 +74,11 @@
       <optional>true</optional>
     </dependency>
 
+    <dependency>
+      <groupId>org.citrusframework</groupId>
+      <artifactId>citrus-test-api-core</artifactId>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>org.citrusframework</groupId>
       <artifactId>citrus-junit5</artifactId>
